@@ -61,6 +61,28 @@ void CuteBuzzerSoundsClass::bendTones (float initFrequency, float finalFrequency
 }
 
 
+int joyfulSounds[]={S_DISCONNECTION,S_BUTTON_PUSHED,S_MODE1,S_MODE2,S_MODE3,S_HAPPY_SHORT,S_SUPER_HAPPY};
+const int unhappySounds[]={S_DISGRUNTLED,S_SAD,S_CONFUSED_SHORT};
+const int shortUnhappySounds[]={S_DISGRUNTLED,S_CONFUSED_SHORT};
+
+int getRandomSound(int soundSetName[]) {
+  return soundSetName[random(sizeof(soundSetName)/2)];
+}
+
+void CuteBuzzerSoundsClass::playRandom(int soundSetName) {
+  int temp;
+  switch(soundSetName) {
+    case SG_JOYFUL:
+      Serial.println(getRandomSound(joyfulSounds));
+      temp = getRandomSound(joyfulSounds);
+      cute.play(temp);
+      break;
+    case SG_UNHAPPY:
+      cute.play(shortUnhappySounds[random(sizeof(shortUnhappySounds)/2)]);
+      break;
+  }
+}
+
 void CuteBuzzerSoundsClass::play(int soundName){
   switch(soundName) {
 
@@ -161,6 +183,11 @@ void CuteBuzzerSoundsClass::play(int soundName){
     bendTones(1699, 500, 1.04, 8, 3);
     bendTones(1000, 1700, 1.05, 9, 10);
     break;
+  case S_CONFUSED_SHORT:
+    bendTones(1000, 1700, 1.03, 8, 2);
+    bendTones(1699, 500, 1.04, 8, 3);
+    bendTones(1000, 1700, 1.05, 9, 10);
+    break;
 
   case S_FART1:
     bendTones(1600, 3000, 1.02, 2, 15);
@@ -173,6 +200,13 @@ void CuteBuzzerSoundsClass::play(int soundName){
   case S_FART3:
     bendTones(1600, 4000, 1.02, 2, 20);
     bendTones(4000, 3000, 1.02, 2, 20);
+    break;
+
+  case S_DISGRUNTLED:
+    bendTones(6000,2000, 1.10, 2, 20);
+    delay(50);
+    bendTones(880, 700, 1.15, 20, 200);
+
     break;
 
   case PIRATES:

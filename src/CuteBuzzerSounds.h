@@ -19,6 +19,7 @@ void initBuzzer(int buzzerPin);
 void _tone (float noteFrequency, long noteDuration, int silentDuration);
 void bendTones (float initFrequency, float finalFrequency, float prop, long noteDuration, int silentDuration);
 void play(int soundName);
+void playRandom(int soundSetName);
 
 
 private:
